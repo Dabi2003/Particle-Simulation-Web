@@ -1,13 +1,10 @@
-package controllers;                // tip when doing other APIs press Alt Enter to Im
+package controllers;
 
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONObject;
 import server.Main;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +16,7 @@ import java.sql.ResultSet;
 
 
 public class Particles {
-    @GET
+    @POST
     @Path("get")
     public  String Particle(@FormDataParam("ParticleID") Integer ParticleID, @FormDataParam("Name") String Name, @FormDataParam("Symbol") Character Symbol, @FormDataParam("Anti-Particle") String Antiparticle,
                              @FormDataParam("Charge") Integer Charge,@FormDataParam("Radius")Integer Radius,@FormDataParam("Anti-Symbol")String Antisymbol,@FormDataParam("Description")String Description){
