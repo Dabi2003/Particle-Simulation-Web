@@ -1,39 +1,37 @@
 package controllers;
 
-import org.glassfish.jersey.media.multipart.FormDataParam;
+
 import org.json.simple.JSONObject;
 import server.Main;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
-@Path("particles/")
+@Path("Particles/")
 @Consumes(MediaType.MULTIPART_FORM_DATA)
 @Produces(MediaType.APPLICATION_JSON)
 
-
 public class Particles {
-    @POST
-    @Path("get")
-    public  String Particle(@FormDataParam("ParticleID") Integer ParticleID, @FormDataParam("Name") String Name, @FormDataParam("Symbol") Character Symbol, @FormDataParam("Anti-Particle") String Antiparticle,
-                             @FormDataParam("Charge") Integer Charge,@FormDataParam("Radius")Integer Radius,@FormDataParam("Anti-Symbol")String Antisymbol,@FormDataParam("Description")String Description){
+    @GET
+    @Path("get/{ParticleID}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public  String GetParticle(@PathParam("ParticleID") Integer ParticleID){
         System.out.println("Invoked Particles.GetParticle() with ParticleID " + ParticleID);
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT Name,Symbol,Anti-Particle,Charge,Radius,Anti-Symbol,Description FROM Particles WHERE ParticleID=?");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT Name,Symbol,AntiParticle,Charge,Radius,AntiSymbol,Description FROM Particles WHERE ParticleID=?");
             ps.setInt(1, ParticleID);
             ResultSet results = ps.executeQuery();
             JSONObject response = new JSONObject();
             if (results.next()==true) {
                 response.put("ParticleID", ParticleID);
                 response.put("Name", results.getString(1));
-                response.put("Symbol", results.getCharacterStream(2));
-                response.put("Anti-Particle", results.getString(3));
+                response.put("Symbol", results.getString(2));
+                response.put("AntiParticle", results.getString(3));
                 response.put("Charge", results.getInt(4));
                 response.put("Radius", results.getInt(5));
-                response.put("Anti-Symbol", results.getInt(6));
+                response.put("AntiSymbol", results.getString(6));
                 response.put("Description", results.getString(7));
             } else{
                 System.out.println("error");
