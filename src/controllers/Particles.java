@@ -1,6 +1,7 @@
 package controllers;
 
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import server.Main;
 import javax.ws.rs.*;
@@ -8,13 +9,13 @@ import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-@Path("Particles/")
+@Path("Particles/") //started with the Path parameter ttttttttt
 @Consumes(MediaType.MULTIPART_FORM_DATA)
 @Produces(MediaType.APPLICATION_JSON)
 
-public class Particles {
+public class Particles{            //declaring particles class
     @GET
-    @Path("get/{ParticleID}")
+    @Path("get/{ParticleID}")   //created a path to read
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public  String GetParticle(@PathParam("ParticleID") Integer ParticleID){
@@ -36,14 +37,39 @@ public class Particles {
             } else{
                 System.out.println("error");
             }
-
         return response.toString();
         } catch (Exception exception) {
             System.out.println("Database error:" + exception.getMessage());
             return "{\"Error\": \"Unable to get item, please see server console for more info.\"}";
         }
+    }
+    @GET
+    @Path("list")
+    public String Particlelist(){
+        System.out.println("Invoked Particles.Particlelist()");
+        JSONArray response= new JSONArray();
+        try{
+            PreparedStatement ps=Main.db.prepareStatement("SELECT Name,Charge,Description From Particles");
+            ResultSet results= ps.executeQuery();
+            while (results.next()==true){
+                JSONObject row = new JSONObject();
+                row.put("Name",results.getString(1));
+                row.put("Charge",results.getString(2));
+                row.put("Description",results.getString(3));
+                response.add(row);
+            }
+            return response.toString();
 
+        } catch(Exception exception){
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"Error\": \"Unable to list items.  Error code xx.\"}";
 
+        }
     }
 
+
+
+
 }
+
+
