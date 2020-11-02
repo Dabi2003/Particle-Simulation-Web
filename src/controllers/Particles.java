@@ -11,24 +11,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
-@Path("Particles/") //started with the Path parameter ttttttttt
+@Path("Particles/") //started with the Path Particles to show that the request relates to the particles table
 @Consumes(MediaType.MULTIPART_FORM_DATA)
 @Produces(MediaType.APPLICATION_JSON)
 
 public class Particles{            //declaring particles class
     @GET
-    @Path("get/{ParticleID}")   //created a path to read particle record
+    @Path("get/{Name}")   //the path that captures what particle the user wants
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public  String GetParticle(@PathParam("ParticleID") Integer ParticleID){
-        System.out.println("Invoked Particles.GetParticle() with ParticleID " + ParticleID);
+    public  String GetParticle(@PathParam("Name") String Name){
+        System.out.println("Invoked Particles.GetParticle() with Name " + Name);
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT Name,Symbol,AntiParticle,Charge,Radius,AntiSymbol,Description FROM Particles WHERE ParticleID=?");
-            ps.setInt(1, ParticleID);
+            PreparedStatement ps = Main.db.prepareStatement("SELECT Name,Symbol,AntiParticle,Charge,Radius,AntiSymbol,Description FROM Particles WHERE Name=?");
+            ps.setString(1, Name);
             ResultSet results = ps.executeQuery();
             JSONObject response = new JSONObject();
             if (results.next()==true) {
-                response.put("ParticleID", ParticleID);
+                response.put("ParticleID", Name);
                 response.put("Name", results.getString(1));
                 response.put("Symbol", results.getString(2));
                 response.put("AntiParticle", results.getString(3));

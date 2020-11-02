@@ -16,7 +16,7 @@ public class Activites{
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public  String GetActivity(@PathParam("ActivityID") Integer ActivityID){
-        System.out.println("Invoked Activites.GetActivity() with ActivityID" + ActivityID);
+        System.out.println("Invoked Activites.GetActivity() with ActivityID " + ActivityID);
         try{
             PreparedStatement ps = Main.db.prepareStatement("SELECT Title,URL,Description FROM Activites WHERE ActivityID=?");
             ps.setInt(1,ActivityID);
