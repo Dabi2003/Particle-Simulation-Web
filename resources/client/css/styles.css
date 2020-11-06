@@ -1,0 +1,20 @@
+body{
+    background-color: black;
+}
+
+
+div.relative{
+    position:relative;
+    top:40px;
+    left:650px;
+    bottom:400px;
+}
+h1{
+    color:white;
+    height:400px;
+    width:300px;
+}
+img{
+    position:relative;
+    top:40px;
+}
