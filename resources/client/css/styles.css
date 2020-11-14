@@ -18,3 +18,19 @@ img{
     position:relative;
     top:40px;
 }
+
+#PPBUTTON{
+    border-color:green;
+}
+#screen{
+    border: solid white 1px;
+    width:800px;
+    height:600px;
+}
+#PPBODY{
+    background: black;
+}
+div.relative2{
+    position:relative;
+    top:250px;
+}

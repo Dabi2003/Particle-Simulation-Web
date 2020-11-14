@@ -11,8 +11,10 @@ function getPP(){  // declaring a function to fetch the "Pair Production web pag
         if(response.hasOwnProperty("Error")){  // Checks if web browser has an error
             alert(JSON.stringify(response)); //If there is convert JSON Object to a string
         } else{
-            console.log(response.URL); // this is a test to see if the correct URL was fetched.
+            window.open(response.URL); // this is a test to see if the correct URL was fetched.
+
         }
+
 
     });
 
