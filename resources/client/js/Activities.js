@@ -1,6 +1,6 @@
-function getPP(){  // declaring a function to fetch the "Pair Production web page
+function getActivity(ID){  // declaring a function to fetch the Activity with it's ID as a parameter
     console.log("Invoked getPP()");  // A test to see if the function was actually called
-    let ActivityID=1; //declaring the ActivityID to 1 which is the same ActivityID for the record in the database
+    let ActivityID=ID; //declaring the ActivityID as the parameter which is the same ActivityID for the record in the database
     //debugger;
     const url="/Activity/get/";// this is the first part of the API path to get the record
     fetch(url+ActivityID,{ // The API is called and the record is specified
@@ -21,3 +21,4 @@ function getPP(){  // declaring a function to fetch the "Pair Production web pag
 
 
 }
+

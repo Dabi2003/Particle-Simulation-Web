@@ -7,12 +7,18 @@
     <link rel="stylesheet" type="text/css" href="/client/css/styles.css"> <!--linking my HTML to CSS file to configure presentation-->
     <meta charset="UTF-8">
     <title>PAIR PRODUCTION</title>
+    <h1><i> PAIR PRODUCTION!</i></h1>
 </head>
-<div class="relative2">
-<canvas id="screen"></canvas>
-</div>
-<body id="PPBODY">
 
+<canvas id="screen"></canvas>
+
+<body id="PPBODY">
+<form id="Inputs">
+    <input type="text" id="Particle Pair" aria-label="Particle pair">
+    <input type="text" id="speed">
+    <input type="button" value="START" id="STARTBUTTON">
+    <input type="button" value="GO HOME" id="HOMEBUTTON" onclick="goHome()">
+</form>
 
 </body>
 </html>

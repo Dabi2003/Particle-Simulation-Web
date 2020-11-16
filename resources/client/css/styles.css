@@ -1,36 +1,56 @@
-body{
-    background-color: black;
+body{ /*body is element is linked to CSS*/
+    background-color: black;/*background of site is black*/
 }
 
+#ACTIVITIES{ /*the form Id for all the activity buttons is linked to CSS*/
+    position:absolute; /*positioning is in the exact value of the page*/
+    left:500px; /*buttons positioned 500px from left of the page*/
 
-div.relative{
-    position:relative;
-    top:40px;
-    left:650px;
-    bottom:400px;
 }
+
+#Inputs{
+    position:absolute;
+    top:210px;
+    left:890px;
+}
+
 h1{
-    color:white;
-    height:400px;
-    width:300px;
+    color:white;/*Site title is colour white*/
+    height:400px;/*height of title is 400px*/
+    width:300px;/*width is 300px wide*/
 }
-img{
-    position:relative;
-    top:40px;
+img{ /*image of the atom linked to css*/
+    position:absolute;/*positioning is in the exact value of the page*/
+    top:100px;/*buttons positioned 100px from the top of page*/
+    left:500px;/*buttons positioned 500px from the left of page*/
 }
 
-#PPBUTTON{
-    border-color:green;
+#PPBUTTON{ /*linking to pair production button*/
+    border-color:red;  /*border colour is red*/
+    border-width: 20px; /*border width is 20 pixels*/
+    background-color:orange; /*face of button is orange*/
+}
+#ANNBUTTON{ /*Annihilation button linked to CSS*/
+    border-color:limegreen; /*border colour is lime green,nice look on page,*/
+    border-width:20px;/*border width is 20 pixels*/
+    background-color:yellow;/*face of button is yellow*/
 }
 #screen{
     border: solid white 1px;
     width:800px;
     height:600px;
+    position:absolute;
+    top:200px;
 }
 #PPBODY{
     background: black;
 }
-div.relative2{
-    position:relative;
-    top:250px;
+
+
+#HOMEBUTTON{
+    position:absolute;
+    top: 500px;
+    right:100px;
+
+
 }
