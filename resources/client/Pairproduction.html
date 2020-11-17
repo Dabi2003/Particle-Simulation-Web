@@ -6,18 +6,18 @@
     </script>
     <link rel="stylesheet" type="text/css" href="/client/css/styles.css"> <!--linking my HTML to CSS file to configure presentation-->
     <meta charset="UTF-8">
-    <title>PAIR PRODUCTION</title>
-    <h1><i> PAIR PRODUCTION!</i></h1>
+    <title>PAIR PRODUCTION</title> <!--This title is displayed on web tab-->
+    <h1><i> PAIR PRODUCTION!</i></h1><!--This is the title displayed on the page-->
 </head>
 
-<canvas id="screen"></canvas>
+<canvas id="screen"></canvas> <!--creating a canvas which is where the paritcles live-->
 
-<body id="PPBODY">
-<form id="Inputs">
-    <input type="text" id="Particle Pair" aria-label="Particle pair">
-    <input type="text" id="speed">
-    <input type="button" value="START" id="STARTBUTTON">
-    <input type="button" value="GO HOME" id="HOMEBUTTON" onclick="goHome()">
+<body id="PPBODY"><!--gave the body an ID so it can be edited in CSS-->
+<form id="Inputs"><!--declared a form with an ID to hold the inputs needed to perform experiments-->
+    <input type="text" id="Particle Pair"><!-- text box for users to enter the pair of particles they want for interaction-->
+    <input type="text" id="speed"><!--enters the speed they want the particles move at in a text box-->
+    <input type="button" value="START" id="STARTBUTTON"><!--start button for the interaction to take place in canvas when clicked-->
+    <input type="button" value="GO HOME" id="HOMEBUTTON" onclick="goHome()"><!--button used to return to menu to go do a different activity-->
 </form>
 
 </body>

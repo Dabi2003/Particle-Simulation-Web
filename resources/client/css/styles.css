@@ -35,15 +35,15 @@ img{ /*image of the atom linked to css*/
     border-width:20px;/*border width is 20 pixels*/
     background-color:yellow;/*face of button is yellow*/
 }
-#screen{
-    border: solid white 1px;
-    width:800px;
-    height:600px;
-    position:absolute;
-    top:200px;
+#screen{/*links to the canvas in HTML via it's id*/
+    border: solid white 1px; /*Canvas nees to be visible so I made the border white and 1px*/
+    width:800px; /*width of canvas is 800px*/
+    height:600px;/*height of canvas is 600px*/
+    position:absolute; /*positioning is at an exact value on page*/
+    top:200px;/* canvas placed 200px down from the top of the page*/
 }
 #PPBODY{
-    background: black;
+    background: black;/*body of the pair production page is black*/
 }
 
 
