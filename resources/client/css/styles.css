@@ -8,10 +8,10 @@ body{ /*body is element is linked to CSS*/
 
 }
 
-#Inputs{
-    position:absolute;
-    top:210px;
-    left:890px;
+.Inputs{ /*declaring a class for the inputs that will have similar positioning on some web pages*/
+    position:absolute;/*positioning is in the exact value of the page*/
+    top:210px;/*buttons positioned 210px from the top of page*/
+    left:890px;/*buttons positioned 890x from the left of page*/
 }
 
 h1{
@@ -20,11 +20,21 @@ h1{
     width:300px;/*width is 300px wide*/
 }
 img{ /*image of the atom linked to css*/
-    position:absolute;/*positioning is in the exact value of the page*/
+    position:absolute;/*positioning is in the exact area of the page*/
     top:100px;/*buttons positioned 100px from the top of page*/
     left:500px;/*buttons positioned 500px from the left of page*/
 }
+#VIEWBUTTON{/*linking to VIEW button*/
+    border-color: blue;/*border colour is blue*/
+    border-width: 20px; /*border width is 20 pixels*/
+    background-color:aqua;/*face of button is aqua*/
 
+}
+#KNBUTTON{/*linking to knowledge button*/
+    border-color: indigo;/*border colour is indigo*/
+    border-width: 20px; /*border width is 20 pixels*/
+    background-color:violet;/*face of button is violet*/
+}
 #PPBUTTON{ /*linking to pair production button*/
     border-color:red;  /*border colour is red*/
     border-width: 20px; /*border width is 20 pixels*/
@@ -35,22 +45,20 @@ img{ /*image of the atom linked to css*/
     border-width:20px;/*border width is 20 pixels*/
     background-color:yellow;/*face of button is yellow*/
 }
-#screen{/*links to the canvas in HTML via it's id*/
+.screen{/*links to the canvas in HTML via it's id*/
     border: solid white 1px; /*Canvas nees to be visible so I made the border white and 1px*/
     width:800px; /*width of canvas is 800px*/
     height:600px;/*height of canvas is 600px*/
     position:absolute; /*positioning is at an exact value on page*/
     top:200px;/* canvas placed 200px down from the top of the page*/
 }
-#PPBODY{
-    background: black;/*body of the pair production page is black*/
+.ActivityBody{ /*declared a class called to ActivityBody */
+    background: black;/*body of the pair production page is black,declared as a class due to all pages having the same feature*/
 }
 
 
-#HOMEBUTTON{
-    position:absolute;
-    top: 500px;
-    right:100px;
-
-
+.HOMEBUTTON{ /*declaring a class for the GO HOME button because pages will have this feature*/
+    position:absolute;/*positioning is in the exact area of the page*/
+    top: 500px;/*buttons positioned 500px from the top of page*/
+    right:100px;/*buttons positioned 100px from the right of page*/
 }

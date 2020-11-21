@@ -22,3 +22,6 @@ function getActivity(ID){  // declaring a function to fetch the Activity with it
 
 }
 
+function goHome(){
+    window.open("http://localhost:8081/client/Menu.html")
+}
