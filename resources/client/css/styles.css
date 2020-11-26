@@ -24,6 +24,10 @@ img{ /*image of the atom linked to css*/
     top:100px;/*buttons positioned 100px from the top of page*/
     left:500px;/*buttons positioned 500px from the left of page*/
 }
+#ParticleTable{
+    color: white;
+}
+
 #VIEWBUTTON{/*linking to VIEW button*/
     border-color: blue;/*border colour is blue*/
     border-width: 20px; /*border width is 20 pixels*/

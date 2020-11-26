@@ -1,5 +1,5 @@
-let canvas = document.getElementById("screen"); //capturing canvas element so that canvas may be used.
-let ctx = canvas.getContext("2d"); // drawings in canvas are set to 2 dimensional.
+let canvas = document.getElementById("canvas"); //capturing canvas element so that canvas may be used.
+let ctx = canvas.getContext('2d'); // drawings in canvas are set to 2 dimensional.
 console.log(ctx);
 canvas.width = 800; //width of canvas modified due to canvas initially small
 canvas.height = 600;// height of canvas modified due to canvas initially small
