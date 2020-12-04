@@ -9,14 +9,22 @@
     <link rel="stylesheet" type="text/css" href="/client/css/styles.css"> <!--linking my HTML to CSS file to configure presentation-->
     <title>KNOWLEDGE</title> <!--This title is displayed on web tab-->
     <h1><i>KNOWLEDGE!</i></h1><!--This is the title displayed on the page-->
+    <p id="Opening"> There are four types of forces in this universe they are:</p> <!--The first text apart from title that is vital to understanding these particles-->
+    <h2 id="Strong">STRONG NUCLEAR FORCE</h2> <h2 id="Weak">WEAK NUCLEAR FORCE</h2> <h2 id="ElectroForce">ELECTROSTATIC FORCE</h2> <h2 id="Gravity">GRAVITATIONAL FORCE</h2>
+    <!--these forces are important so I made them as individual elements to customize in CSS to make them big and visible-->
+
 </head>
+<h3 id="Hadrons">Hadrons: These are particles that feel the STRONG NUCLEAR FORCE and are made of other particles called QUARKS.</h3>
+<h3 id="Leptons">Leptons: These are particles that feel the WEAK NUCLEAR FORCE and are NOT made of anything, in other words they are FUNDAMENTAL PARTICLES</h3>
+<h3 id="Quarks">Quarks:These are FUNDAMENTAL PARTICLES that make up a hadron</h3>
+<h3 id="ChargedParticles">Charged Particles: Any particles that has a POSITIVE(+) or NEGATIVE(-) can attract and repel from each other via an ELECTROSTATIC FORCE </h3>
 <body class="ActivityBody">
 <form class="Inputs"><!--declared a form with a class to position the go home button on this page-->
     <input type="button" value="GO HOME" class="HOMEBUTTON" onclick="goHome()"><!--button used to return to menu to go do a different activity-->
 </form>
 <table id="ParticleTable">
     <script>// adding a script element so that I may call some functions without the need of any inputs like buttons
-        getParticleList(); //function called to fetch Particle data from database
+        getParticleList(); //function called to fetch Particle data from database this will all be hel in this table called ParticleTable
 
     </script>
 </table>

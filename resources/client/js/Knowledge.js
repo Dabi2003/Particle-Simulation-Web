@@ -17,11 +17,11 @@ function getParticleList(){ //declaring a function to get my particle list unto 
 
 }
 
-function formatParticleList(myJSONArray) {
-    let dataHTML = "";
+function formatParticleList(myJSONArray) { //function to start listing the particle data from database
+    let dataHTML = ""; // setting variable  for each record of the particle table
     for (let item of myJSONArray) {
-        dataHTML += "<tr><td>" + "Name: "+item.Name + "<td><td>" +"Charge: "+ item.Charge +"<td><td>"+ "About:"+item.Description+ "<tr><td>";
+        dataHTML += "<tr><td>" + "Name: "+item.Name + "<td><td>" +"Charge: "+ item.Charge + "<td><td>"+ "Description:"+item.Description+ "<tr><td>"; // adding the record to an invisible table
     }
-    document.getElementById("ParticleTable").innerHTML = dataHTML;
+    document.getElementById("ParticleTable").innerHTML = dataHTML; // outputting table unto page
 
 }

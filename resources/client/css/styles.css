@@ -25,7 +25,56 @@ img{ /*image of the atom linked to css*/
     left:500px;/*buttons positioned 500px from the left of page*/
 }
 #ParticleTable{
-    color: white;
+    color: white; /*making data visible by setting it's colour to white*/
+}
+#Opening{
+    color:white;
+    position:absolute;
+    top:100px;
+}
+#Strong{
+    color:red;
+    position:absolute;
+    top:150px;
+}
+#Weak{
+    color:yellow;
+    position:absolute;
+    top:150px;
+    left:350px;
+}
+#ElectroForce{
+    color:aqua;
+    position:absolute;
+    top:150px;
+    left:700px;
+}
+#Gravity{
+    color:limegreen;
+    position:absolute;
+    top:150px;
+    left:1050px
+}
+#Hadrons{
+    color:violet;
+    position:absolute;
+    top:190px;
+}
+#Leptons{
+    color:orange;
+    position:absolute;
+    top:210px;
+}
+#Quarks{
+    color:lawngreen;
+    position:absolute;
+    top:270px;
+}
+#ChargedParticles{
+    color:deepskyblue;
+    position:absolute;
+    top:240px;
+
 }
 
 #VIEWBUTTON{/*linking to VIEW button*/
