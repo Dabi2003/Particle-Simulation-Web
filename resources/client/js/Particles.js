@@ -1,8 +1,20 @@
-let canvas = document.getElementById("canvas"); //capturing canvas element so that canvas may be used.
-let ctx = canvas.getContext('2d'); // drawings in canvas are set to 2 dimensional.
-console.log(ctx);
-canvas.width = 800; //width of canvas modified due to canvas initially small
-canvas.height = 600;// height of canvas modified due to canvas initially small
+let canvas;
+let ctx;
+let Proton;
+
+function pageLoad() {
+
+    canvas = document.getElementById("canvas"); //capturing canvas element so that canvas may be used.
+    ctx = canvas.getContext('2d'); // drawings in canvas are set to 2 dimensional.
+    console.log(ctx);
+    canvas.width = 800; //width of canvas modified due to canvas initially small
+    canvas.height = 600;// height of canvas modified due to canvas initially small
+
+    Proton= new Particle( 10, 300,3,0,8,"yellow");
+
+    draw();
+
+}
 
 function Particle(px, py, vx, vy, radius, colour) {
     this.px = px;
@@ -39,16 +51,15 @@ function Particle(px, py, vx, vy, radius, colour) {
 
     }
 }
-let Proton= new Particle( 10, 300,3,0,8,"yellow");
+
 function draw() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     Proton.load();
+    Proton.move();
     window.requestAnimationFrame(draw);
 
 }
-
-draw();
 
 function goHome(){
     window.open("http://localhost:8081/client/Menu.html")
