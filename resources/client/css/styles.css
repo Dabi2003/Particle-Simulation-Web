@@ -7,7 +7,9 @@ body{ /*body is element is linked to CSS*/
     left:500px; /*buttons positioned 500px from left of the page*/
 
 }
-
+.colorWhite{
+    color:white; /*color class that sets text to white*/
+}
 .Inputs{ /*declaring a class for the inputs that will have similar positioning on some web pages*/
     position:absolute;/*positioning is in the exact value of the page*/
     top:210px;/*buttons positioned 210px from the top of page*/
@@ -27,33 +29,34 @@ img{ /*image of the atom linked to css*/
 #ParticleTable{
     color: white; /*making data visible by setting it's colour to white*/
 }
-#Opening{
-    color:white;
-    position:absolute;
-    top:100px;
+#Opening{    /* linking the opening tag by using it's element*/
+    color:white; /*White is clear contrast from black*/
+    position:absolute; /* making the position of the text to exact position I want it*/
+    top:100px; /* text is placed 100px from the top of the page*/
 }
-#Strong{
-    color:red;
-    position:absolute;
-    top:150px;
+#Strong{  /*linking the "STRONG NUCLEAR FORCE" QUOTE TO CSS*/
+
+    color:red; /* colour of the red*/
+    position:absolute; /* making the position of the text to exact position I want it*/
+    top:150px;/* text placed 150px from the top of page */
 }
-#Weak{
-    color:yellow;
-    position:absolute;
-    top:150px;
-    left:350px;
+#Weak{ /*linking the "WEAK NUCLEAR FORCE" quote to CSS*/
+    color:yellow; /* text colour is yellow*/
+    position:absolute; /*making the position of the text to exact position I want it*/
+    top:150px;/*positioned 150 px from the top of the page*/
+    left:350px;/* to prevent the big texts from overlapping with each other I shifted it 350px from the left of the page*/
 }
-#ElectroForce{
-    color:aqua;
-    position:absolute;
-    top:150px;
-    left:700px;
+#ElectroForce{ /*linking the "ELECTROSTATIC FORCE" quote with the CSS*/
+    color:aqua;/* colour of text is aqa*/
+    position:absolute;/*making the position of the text to exact position I want it*/
+    top:150px; /*positioned 150 px from the top of the page*/
+    left:700px;/* to prevent the big texts from overlapping with each other I shifted it 700px from the left of the page*/
 }
-#Gravity{
-    color:limegreen;
-    position:absolute;
-    top:150px;
-    left:1050px
+#Gravity{/*linking the "GRAVITATIONAL FORCE" quote with the CSS*/
+    color:limegreen; /*colour of text is lime green*/
+    position:absolute;/*making the position of the text to exact position I want it*/
+    top:150px;/*positioned 150 px from the top of the page*/
+    left:1050px/* to prevent the big texts from overlapping with each other I shifted it 1050px from the left of the page*/
 }
 #Hadrons{
     color:violet;

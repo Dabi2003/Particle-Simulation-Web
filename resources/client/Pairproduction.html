@@ -13,9 +13,11 @@
 </div>
 <body class="ActivityBody"onload="pageLoad()"><!--gave the body a class so it can be edited in CSS-->
 <form class="Inputs"><!--declared a form with a class to hold the inputs needed to perform experiments-->
+    <p class="colorWhite"> Particle Name</p>
     <input type="text" id="Particle"><!-- text box for users to enter the pair of particles they want for interaction-->
+    <p class="colorWhite">Particle speed</p>
     <input type="text" id="speed"><!--enters the speed they want the particles move at in a text box-->
-    <input type="button" value="START" id="STARTPP"><!--start button for the interaction to take place in canvas when clicked-->
+    <input type="button" value="START" id="STARTPP" onclick="Start()"><!--start button for the interaction to take place in canvas when clicked-->
     <input type="button" value="GO HOME" class="HOMEBUTTON" onclick="goHome()"><!--button used to return to menu to go do a different activity-->
 </form>
 </body>
