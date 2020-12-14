@@ -2,10 +2,12 @@ let canvas; //the canvas in HTML
 let ctx; //the context of the canvas
 let p1; //particle  entered by user
 let p2; //particle clone that user has entered
-let p3;
+let p3;// anti particle
+let p4;//product particle
 let check=0;// at first no particle is created so check is at false
 let collide=false;// at first there is no collision detected so 'collide' is false.
-let p3load=false;
+let p3load=false; // no particles that should appear after the process must appear at the start of simulation.
+let p4load=false;
 function getParticle(){   //API used ti fetch particle data from database
     console.log("Invoked getParticle()");
     const Name= document.getElementById("Particle").value;
@@ -22,6 +24,7 @@ function getParticle(){   //API used ti fetch particle data from database
             p1= new Particle(10,300,parseFloat(Speed),0.0,response.Radius,getRandomColor(),response.Symbol); //the particle the user has entered is created
             p2= new Particle(700,300,parseFloat(Speed),0.0,response.Radius,getRandomColor(),response.Symbol);//the particle clone is created as well
             p3= new Particle(400,300,parseFloat(Speed),0.0,p1.radius,getRandomColor(),response.AntiSymbol); //the anti particle that is made after the process.
+            p4=new Particle(300,300,parseFloat(Speed)*-1,0.0,p1.radius,getRandomColor(),response.Symbol);//product particle created/
             console.log(p1.radius);
             console.log(p1.vx);
             check=1;
@@ -79,10 +82,10 @@ function Particle(px, py, vx, vy, radius, colour,symbol) {    // class named par
     this.move = function () { //method to for the particle to move and deflect from walls.
         this.px += this.velocity.x;
         this.py += this.velocity.y;
-        if (this.px < 0 || this.px > canvas.width) {
+        if (this.px+radius < 0 || this.px+radius > canvas.width) {
             this.velocity.x = -this.velocity.x;
         }
-        if (this.py < 0 || this.py > canvas.height) {
+        if (this.py+radius < 0 || this.py+radius > canvas.height) {
             this.velocity.y = -this.velocity.y;
         }
 
@@ -100,7 +103,10 @@ function draw() { //main function runs the canvas animation
     p2.move();
     let d=getDistance(p1.px,p1.py,p2.px,p2.py);//'d' is for distance between the two particles
     let d2=getDistance(p2.px,p2.py,p3.px,p3.py); //distance between the clone and produced particle
-    let d3=getDistance(p1.px,p1.py,p3.px,p3.py); //distance between the orginal particle and reduced particle
+    let d3=getDistance(p1.px,p1.py,p3.px,p3.py);
+    let d4=getDistance(p4.px,p4.py,p3.px,p3.py);
+    let d5=getDistance(p4.px,p4.py,p2.px,p2.py);
+    let d6=getDistance(p4.px,p4.py,p1.px,p1.py);//distance between the orginal particle and reduced particle
     //detecting and resolving collisions for all cases of particles
     if(d<(p1.radius+p2.radius)){
         resolveCollision(p1,p2);
@@ -112,11 +118,23 @@ function draw() { //main function runs the canvas animation
     if(d3<(p1.radius+p3.radius)&&p3load==true){
         resolveCollision(p1,p3);
     }
+    if(d4<(p4.radius+p3.radius)&&p4load==true){
+        resolveCollision(p4,p3)
+    }
+    if(d5<(p4.radius+p2.radius)&&p4load==true){
+        resolveCollision(p4,p2);
+    }
+    if(d6<(p4.radius+p1.radius)&&p4load==true){
+        resolveCollision(p4,p1);
+    }
     if(collide==true){
         p3.colour=getRandomColor();
         p3.load();
         p3.move();
+        p4.load();
+        p4.move();
         p3load=true;
+        p4load=true;
     }
 
     window.requestAnimationFrame(draw);
@@ -130,6 +148,7 @@ function goHome(){ //returning to main menu
 function Start(){
     collide=false; //added these to make sure that when the start button is pressed again there are no collisions and no product particle
     p3load=false;
+    p4load=false;
     getParticle(check);
    if(check==1){
        animate()
