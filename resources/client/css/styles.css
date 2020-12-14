@@ -79,6 +79,16 @@ img{ /*image of the atom linked to css*/
     top:240px;
 
 }
+#AntiParticles{
+    color: sandybrown;
+    position: absolute;
+    top:300px;
+}
+#IntrotoList{
+    color:white;
+    position: absolute;
+    top: 350px;
+}
 
 #VIEWBUTTON{/*linking to VIEW button*/
     border-color: blue;/*border colour is blue*/
