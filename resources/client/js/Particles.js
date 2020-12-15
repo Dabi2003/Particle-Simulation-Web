@@ -8,6 +8,7 @@ let check=0;// at first no particle is created so check is at false
 let collide=false;// at first there is no collision detected so 'collide' is false.
 let p3load=false; // no particles that should appear after the process must appear at the start of simulation.
 let p4load=false;
+let pause;
 function getParticle(){   //API used ti fetch particle data from database
     console.log("Invoked getParticle()");
     const Name= document.getElementById("Particle").value;
@@ -136,8 +137,10 @@ function draw() { //main function runs the canvas animation
         p3load=true;
         p4load=true;
     }
+    if(pause==false) { // no other frame is outputted when pause unless the animation is unpaused
+        window.requestAnimationFrame(draw);
+    }
 
-    window.requestAnimationFrame(draw);
 
 
 }
@@ -146,17 +149,19 @@ function goHome(){ //returning to main menu
     window.open("http://localhost:8081/client/Menu.html")
 }
 function Start(){
+    pause=false;
     collide=false; //added these to make sure that when the start button is pressed again there are no collisions and no product particle
     p3load=false;
     p4load=false;
     getParticle(check);
    if(check==1){
-       animate()
+       draw();
        console.log(check);
     }
 }
-function animate(){
-    draw();
+function Stop(){ // function to set pause to be true so animation stops
+    pause=true;
+    console.log(pause);
 }
 function getRandomColor() { //function to set a random colour for a particle
     let letters = '0123456789ABCDEF'; //colours are represented as Hexadecimal
