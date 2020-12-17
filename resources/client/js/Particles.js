@@ -8,7 +8,7 @@ let check=0;// at first no particle is created so check is at false
 let collide=false;// at first there is no collision detected so 'collide' is false.
 let p3load=false; // no particles that should appear after the process must appear at the start of simulation.
 let p4load=false;
-let pause;
+let pause;// variable need to stop the canvas animation.
 function getParticle(){   //API used ti fetch particle data from database
     console.log("Invoked getParticle()");
     const Name= document.getElementById("Particle").value;
@@ -40,7 +40,7 @@ function getParticle(){   //API used ti fetch particle data from database
 
 
 }
-function pageLoad() {
+function pageLoad() { //set up canvas
 
     canvas = document.getElementById("canvas"); //capturing canvas element so that canvas may be used.
     ctx = canvas.getContext('2d'); // drawings in canvas are set to 2 dimensional.
@@ -48,7 +48,6 @@ function pageLoad() {
     canvas.width = 800; //width of canvas modified due to canvas initially small
     canvas.height = 600;// height of canvas modified due to canvas initially small
 
-    Proton= new Particle( 10, 300,3,0,8,"yellow","p"); //proton particle created
 
 
 
@@ -73,7 +72,7 @@ function Particle(px, py, vx, vy, radius, colour,symbol) {    // class named par
         ctx.arc(this.px, this.py, this.radius, 0, 2 * Math.PI);
         ctx.fillStyle = "white";
         ctx.font="20px Arial";
-        ctx.fillText(symbol,this.px+10,this.py+5); //positioning the symbol
+        ctx.fillText(this.symbol,this.px+10,this.py+5); //positioning the symbol
         ctx.fillStyle=this.colour;
         ctx.fill();
     }
@@ -97,67 +96,103 @@ function Particle(px, py, vx, vy, radius, colour,symbol) {    // class named par
 function draw() { //main function runs the canvas animation
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    p1.vx=0;
     p1.load();
     p1.move();
     p2.load();
     p2.move();
-    let d=getDistance(p1.px,p1.py,p2.px,p2.py);//'d' is for distance between the two particles
-    let d2=getDistance(p2.px,p2.py,p3.px,p3.py); //distance between the clone and produced particle
-    let d3=getDistance(p1.px,p1.py,p3.px,p3.py);
-    let d4=getDistance(p4.px,p4.py,p3.px,p3.py);
-    let d5=getDistance(p4.px,p4.py,p2.px,p2.py);
-    let d6=getDistance(p4.px,p4.py,p1.px,p1.py);//distance between the orginal particle and reduced particle
+    let d = getDistance(p1.px, p1.py, p2.px, p2.py);//'d' is for distance between the two particles
+    let d2 = getDistance(p2.px, p2.py, p3.px, p3.py); //distance between the clone and produced particle
+    let d3 = getDistance(p1.px, p1.py, p3.px, p3.py);
+    let d4 = getDistance(p4.px, p4.py, p3.px, p3.py);
+    let d5 = getDistance(p4.px, p4.py, p2.px, p2.py);
+    let d6 = getDistance(p4.px, p4.py, p1.px, p1.py);//distance between the orginal particle and reduced particle
     //detecting and resolving collisions for all cases of particles
-    if(d<(p1.radius+p2.radius)){
-        resolveCollision(p1,p2);
-        collide=true;
+    if (d < (p1.radius + p2.radius)) {
+        resolveCollision(p1, p2);
+        collide = true;
     }
-    if(d2<(p2.radius+p3.radius)&&p3load==true){
-        resolveCollision(p2,p3);
+    if (d2 < (p2.radius + p3.radius) && p3load == true) {
+        resolveCollision(p2, p3);
     }
-    if(d3<(p1.radius+p3.radius)&&p3load==true){
-        resolveCollision(p1,p3);
+    if (d3 < (p1.radius + p3.radius) && p3load == true) {
+        resolveCollision(p1, p3);
     }
-    if(d4<(p4.radius+p3.radius)&&p4load==true){
-        resolveCollision(p4,p3)
+    if (d4 < (p4.radius + p3.radius) && p4load == true) {
+        resolveCollision(p4, p3)
     }
-    if(d5<(p4.radius+p2.radius)&&p4load==true){
-        resolveCollision(p4,p2);
+    if (d5 < (p4.radius + p2.radius) && p4load == true) {
+        resolveCollision(p4, p2);
     }
-    if(d6<(p4.radius+p1.radius)&&p4load==true){
-        resolveCollision(p4,p1);
+    if (d6 < (p4.radius + p1.radius) && p4load == true) {
+        resolveCollision(p4, p1);
     }
-    if(collide==true){
-        p3.colour=getRandomColor();
+    if (collide == true && p1.vx>=5) {
+        p3.colour = getRandomColor();
         p3.load();
         p3.move();
         p4.load();
         p4.move();
-        p3load=true;
-        p4load=true;
+        p3load = true;
+        p4load = true;
     }
-    if(pause==false) { // no other frame is outputted when pause unless the animation is unpaused
+    if (pause == false) { // no other frame is outputted when pause unless the animation is unpaused
         window.requestAnimationFrame(draw);
     }
-
-
-
 }
+    function draw2(){
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        p1.load();
+        p1.move();
+        p3.load();
+        p3.move();
+        let d = getDistance(p1.px, p1.py, p3.px, p3.py);//'d' is for distance between the two particles
+        if (d < (p1.radius + p3.radius)) {
+            resolveCollision(p1, p3);
+            collide = true;
+        }
+        if(collide==true){
+            p1.radius=5
+            p3.radius=5;
+            p1.colour=getRandomColor();
+            p3.colour=getRandomColor();
+            p1.symbol="γ";
+            p3.symbol="γ";
+        }
+
+        if(pause==false) { // no other frame is outputted when pause unless the animation is unpaused
+            window.requestAnimationFrame(draw2);
+        }
+
+    }
+
+
+
+
 
 function goHome(){ //returning to main menu
     window.open("http://localhost:8081/client/Menu.html")
 }
-function Start(){
+function StartPP(){
     pause=false;
     collide=false; //added these to make sure that when the start button is pressed again there are no collisions and no product particle
     p3load=false;
     p4load=false;
     getParticle(check);
    if(check==1){
-       draw();
+           draw(); //when the button in the pair production page is clicked, start the simulation.
        console.log(check);
     }
+}
+function StartANN(){
+    pause=false;
+    collide=false
+    getParticle(check);
+    if(check==1){
+        draw2(); //when the button in the pair production page is clicked, start the simulation.
+        console.log(check);
+    }
+
 }
 function Stop(){ // function to set pause to be true so animation stops
     pause=true;
