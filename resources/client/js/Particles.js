@@ -3,12 +3,17 @@ let ctx; //the context of the canvas
 let p1; //particle  entered by user
 let p2; //particle clone that user has entered
 let p3;// anti particle
-let p4;//product particle
+let p4;//other particle
 let check=0;// at first no particle is created so check is at false
 let collide=false;// at first there is no collision detected so 'collide' is false.
 let p3load=false; // no particles that should appear after the process must appear at the start of simulation.
 let p4load=false;
 let pause;// variable need to stop the canvas animation.
+let E1;
+
+let P1;
+let P2;
+
 function getParticle(){   //API used ti fetch particle data from database
     console.log("Invoked getParticle()");
     const Name= document.getElementById("Particle").value;
@@ -47,6 +52,10 @@ function pageLoad() { //set up canvas
     console.log(ctx);
     canvas.width = 800; //width of canvas modified due to canvas initially small
     canvas.height = 600;// height of canvas modified due to canvas initially small
+    E1=  new Particle(Math.random()*canvas.width,Math.random()*canvas.height,1,1,5,"blue",'e-');
+    P1= new Particle(Math.random()*canvas.width,Math.random()*canvas.height,3,3,10,"yellow",'p');
+    P2=new Particle(Math.random()*canvas.width,Math.random()*canvas.height,3,3,10,"yellow",'p');
+    // the particles that are instaniated are needed for the VIEW page, I had to add them on page load so that all values will caught when they load on canvas.
 
 
 
@@ -76,16 +85,37 @@ function Particle(px, py, vx, vy, radius, colour,symbol) {    // class named par
         ctx.fillStyle=this.colour;
         ctx.fill();
     }
+    this.attract= function(x,y,OtherParticle) {
+        let dx = -(this.px - x);
+        let dy = -(this.py - y);
+        let vx = (dx / 50)
+        let vy = (dy / 50)
+        this.px += vx;
+        this.py += vy;
+        if (this.px + (this.radius) < this.radius || this.px + (this.radius) > canvas.width) {
+            vx = -vx;
+        }
+        if (this.py + this.radius < this.radius || this.py + this.radius > canvas.height) {
+            vy = -vy;
+        }
+        if (getDistance(OtherParticle.px, OtherParticle.py, this.px, this.py) < (OtherParticle.radius + this.radius)) {
+            vx=-vx;
+        }
+    }
+
+
+
 
 
 
     this.move = function () { //method to for the particle to move and deflect from walls.
+
         this.px += this.velocity.x;
         this.py += this.velocity.y;
-        if (this.px+radius < 0 || this.px+radius > canvas.width) {
+        if (this.px+(this.radius) < this.radius || this.px+(this.radius) > canvas.width) {
             this.velocity.x = -this.velocity.x;
         }
-        if (this.py+radius < 0 || this.py+radius > canvas.height) {
+        if (this.py+(this.radius) < this.radius || this.py+(this.radius) > canvas.height) {
             this.velocity.y = -this.velocity.y;
         }
 
@@ -100,33 +130,27 @@ function draw() { //main function runs the canvas animation
     p1.move();
     p2.load();
     p2.move();
-    let d = getDistance(p1.px, p1.py, p2.px, p2.py);//'d' is for distance between the two particles
-    let d2 = getDistance(p2.px, p2.py, p3.px, p3.py); //distance between the clone and produced particle
-    let d3 = getDistance(p1.px, p1.py, p3.px, p3.py);
-    let d4 = getDistance(p4.px, p4.py, p3.px, p3.py);
-    let d5 = getDistance(p4.px, p4.py, p2.px, p2.py);
-    let d6 = getDistance(p4.px, p4.py, p1.px, p1.py);//distance between the orginal particle and reduced particle
-    //detecting and resolving collisions for all cases of particles
-    if (d < (p1.radius + p2.radius)) {
+
+    if ( getDistance(p1.px, p1.py, p2.px, p2.py)< (p1.radius + p2.radius)) {
         resolveCollision(p1, p2);
         collide = true;
     }
-    if (d2 < (p2.radius + p3.radius) && p3load == true) {
+    if (getDistance(p2.px, p2.py, p3.px, p3.py) < (p2.radius + p3.radius) && p3load == true) {
         resolveCollision(p2, p3);
     }
-    if (d3 < (p1.radius + p3.radius) && p3load == true) {
+    if (  getDistance(p1.px, p1.py, p3.px, p3.py) < (p1.radius + p3.radius) && p3load == true) {
         resolveCollision(p1, p3);
     }
-    if (d4 < (p4.radius + p3.radius) && p4load == true) {
+    if (getDistance(p4.px, p4.py, p3.px, p3.py) < (p4.radius + p3.radius) && p4load == true) {
         resolveCollision(p4, p3)
     }
-    if (d5 < (p4.radius + p2.radius) && p4load == true) {
+    if (getDistance(p4.px, p4.py, p2.px, p2.py) < (p4.radius + p2.radius) && p4load == true) {
         resolveCollision(p4, p2);
     }
-    if (d6 < (p4.radius + p1.radius) && p4load == true) {
+    if ( getDistance(p4.px, p4.py, p1.px, p1.py) < (p4.radius + p1.radius) && p4load == true) {
         resolveCollision(p4, p1);
     }
-    if (collide == true && p1.vx>=5) {
+    if (collide == true && p1.vx>=5) { //when the particle pair entered by user collide with a speed greater or equal to 5
         p3.colour = getRandomColor();
         p3.load();
         p3.move();
@@ -154,7 +178,7 @@ function draw() { //main function runs the canvas animation
         if(collide==true){
             p1.radius=5
             p3.radius=5;
-            p1.colour=getRandomColor();
+            p1.colour=getRandomColor();  // transforming the particles into photons oce they collide.
             p3.colour=getRandomColor();
             p1.symbol="γ";
             p3.symbol="γ";
@@ -167,6 +191,59 @@ function draw() { //main function runs the canvas animation
     }
 
 
+function draw3(){
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    P1.load();
+    P1.move();
+    P2.load();
+    P2.move();
+    E1.load();
+
+
+    let attraction_d= getDistance(E1.px,E1.py,P1.px,P1.py);
+    let attraction_d2=getDistance(E1.px,E1.py,P2.px,P2.py);
+    let repel_d=getDistance(P1.px,P1.py,P2.px,P2.py);
+    if(attraction_d<200){
+        E1.attract(P1.px,P1.py,P1);
+        console.log(E1.vx);
+    } else{
+        if(attraction_d>200){
+            while(E1.velocity.x!=0){
+                E1.velocity.x-=0.5;
+                E1.velocity.y-=0.5;
+            }
+        }
+    }
+    if(attraction_d2<200){
+        E1.attract(P2.px,P2.py,P2);
+
+    } else{
+        if(attraction_d2>200){
+            while(E1.velocity.x!=0){
+                E1.velocity.x-=0.5;
+                E1.velocity.y-=0.5;
+            }
+        }
+    }
+    if(repel_d<100) {
+        P1.velocity.x=-(P1.velocity.x);
+        P1.velocity.y=-(P1.velocity.y);
+        P2.velocity.x=-(P2.velocity.x);
+        P2.velocity.y=-(P2.velocity.y);
+
+    }
+
+
+
+
+
+
+    if(pause==false){
+        window.requestAnimationFrame(draw3);
+    }
+
+}
 
 
 
@@ -192,6 +269,13 @@ function StartANN(){
         draw2(); //when the button in the pair production page is clicked, start the simulation.
         console.log(check);
     }
+
+}
+
+function StartVIEW(){
+    pause=false;
+    collide=false;
+    draw3();
 
 }
 function Stop(){ // function to set pause to be true so animation stops

@@ -8,13 +8,14 @@
     <title>VIEW</title> <!--This title is displayed on web tab-->
     <h1><i>VIEW!</i></h1><!--This is the title displayed on the page-->
 </head>
-<canvas class="screen"></canvas> <!--creating a canvas which is where the paritcles live-->
-<body class="ActivityBody"><!--this will makes sure that the page has a black background-->
+<canvas class="screen" id="canvas" ></canvas> <!--creating a canvas which is where the paritcles live-->
+<body class="ActivityBody" onload="pageLoad()"><!--this will makes sure that the page has a black background-->
 
 <form class="Inputs"><!--declared a form with a class to position the go home button on this page-->
-    <input type="button" value="GO HOME" class="HOMEBUTTON" onclick="goHome()"><!--button used to return to menu to go do a different activity-->
+    <input type="button" value="START" onclick="StartVIEW()" >
+    <input type="button" value="STOP" onclick="Stop()">
 </form>
-
+<input type="button" value="GO HOME" class="HOMEBUTTON" onclick="goHome()"><!--button used to return to menu to go do a different activity-->
 
 </body>
 </html>
