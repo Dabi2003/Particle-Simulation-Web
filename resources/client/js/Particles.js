@@ -87,19 +87,20 @@ function Particle(px, py, vx, vy, radius, colour,symbol) {    // class named par
     }
     this.attract= function(x,y,OtherParticle) {
         let dx = -(this.px - x);
-        let dy = -(this.py - y);
-        let vx = (dx / 50)
+        let dy = -(this.py - y); // the coordinates the electron needs to travel to get to a proton
+        let vx = (dx / 50)  // move to the proton at this speed, this prevents the electron from dotting forwards across the canvas.
         let vy = (dy / 50)
         this.px += vx;
         this.py += vy;
         if (this.px + (this.radius) < this.radius || this.px + (this.radius) > canvas.width) {
-            vx = -vx;
+            vx = -vx;               // bounce back if electron hits canvas wall(keeps electron in the canvas space)
         }
         if (this.py + this.radius < this.radius || this.py + this.radius > canvas.height) {
             vy = -vy;
         }
         if (getDistance(OtherParticle.px, OtherParticle.py, this.px, this.py) < (OtherParticle.radius + this.radius)) {
-            vx=-vx;
+            vx=-vx; // bounce back if electron hits the proton it is attracting to.
+            vy=-vy;
         }
     }
 
@@ -113,7 +114,7 @@ function Particle(px, py, vx, vy, radius, colour,symbol) {    // class named par
         this.px += this.velocity.x;
         this.py += this.velocity.y;
         if (this.px+(this.radius) < this.radius || this.px+(this.radius) > canvas.width) {
-            this.velocity.x = -this.velocity.x;
+            this.velocity.x = -this.velocity.x;    // particle deflection when the particle surfaces touch walls of canvas
         }
         if (this.py+(this.radius) < this.radius || this.py+(this.radius) > canvas.height) {
             this.velocity.y = -this.velocity.y;
@@ -196,20 +197,19 @@ function draw3(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     P1.load();
     P1.move();
-    P2.load();
+    P2.load();  // spawing particles into the canvas to perform their functions
     P2.move();
     E1.load();
 
 
     let attraction_d= getDistance(E1.px,E1.py,P1.px,P1.py);
-    let attraction_d2=getDistance(E1.px,E1.py,P2.px,P2.py);
-    let repel_d=getDistance(P1.px,P1.py,P2.px,P2.py);
+    let attraction_d2=getDistance(E1.px,E1.py,P2.px,P2.py); // detecting how far the electron is from each proton, to see weather it can be attracted
+    let repel_d=getDistance(P1.px,P1.py,P2.px,P2.py); // detecting how far the protons are to see weather they should repel.
     if(attraction_d<200){
-        E1.attract(P1.px,P1.py,P1);
-        console.log(E1.vx);
+        E1.attract(P1.px,P1.py,P1);  // electron attracts to this proton if the distance is less than 200( chose the value to keep the electron moving)
     } else{
         if(attraction_d>200){
-            while(E1.velocity.x!=0){
+            while(E1.velocity.x!=0){ // if the proton is too far away from electron, then it should slow down till it is at rest again.
                 E1.velocity.x-=0.5;
                 E1.velocity.y-=0.5;
             }
@@ -228,7 +228,7 @@ function draw3(){
     }
     if(repel_d<100) {
         P1.velocity.x=-(P1.velocity.x);
-        P1.velocity.y=-(P1.velocity.y);
+        P1.velocity.y=-(P1.velocity.y);    // the protons repel when their distance between them is less than 100(this is just a random value but it had to be this big so users can see the repulsion, not that they collide)
         P2.velocity.x=-(P2.velocity.x);
         P2.velocity.y=-(P2.velocity.y);
 
